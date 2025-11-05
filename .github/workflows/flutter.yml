@@ -1,0 +1,101 @@
+name: 플러터 테스트 및 빌드
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: self-hosted
+
+    steps:
+      - name: 저장소 확인
+        uses: actions/checkout@v4
+
+      - name: Gradle & Flutter 캐시 복원
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.gradle/wrapper
+            ~/.gradle/caches
+            ~/.pub-cache
+            .dart_tool
+            build
+          key: build-cache-${{ runner.os }}-${{ hashFiles('**/pubspec.lock') }}
+          restore-keys: |
+            build-cache-${{ runner.os }}-
+
+      - name: Flutter 경로 등록
+        run: |
+          echo "/home/ming/.flutter/bin" >> $GITHUB_PATH
+          echo "/home/ming/.flutter/bin/cache/dart-sdk/bin" >> $GITHUB_PATH
+
+      - name: 디버그 환경 정보 출력
+        run: |
+          echo "ANDROID_HOME=$ANDROID_HOME"
+          echo "JAVA_HOME=$JAVA_HOME"
+          java -version
+          echo "Gradle 버전 확인:"
+          /home/ming/.flutter/bin/cache/artifacts/engine/android-arm-release/gradlew --version || true
+          echo "환경 변수 PATH:"
+          echo "$PATH"
+        env:
+          ANDROID_HOME: /home/ming/sdk
+          JAVA_HOME: /home/ming/.java/jdk-23.0.2
+          PATH: /home/ming/sdk/platform-tools:/home/ming/sdk/emulator:/home/ming/.flutter/bin:/home/ming/.flutter/bin/cache/dart-sdk/bin:/usr/bin:/bin
+
+      - name: Flutter 버전 확인
+        run: flutter --version -v
+        env:
+          ANDROID_HOME: /home/ming/sdk
+          JAVA_HOME: /home/ming/.java/jdk-23.0.2
+          PATH: /home/ming/sdk/platform-tools:/home/ming/sdk/emulator:/home/ming/.flutter/bin:/home/ming/.flutter/bin/cache/dart-sdk/bin:/usr/bin:/bin
+
+      - name: Flutter 의존성 설치
+        run: flutter pub get --verbose
+        env:
+          ANDROID_HOME: /home/ming/sdk
+          JAVA_HOME: /home/ming/.java/jdk-23.0.2
+          PATH: /home/ming/sdk/platform-tools:/home/ming/sdk/emulator:/home/ming/.flutter/bin:/home/ming/.flutter/bin/cache/dart-sdk/bin:/usr/bin:/bin
+
+      - name: 코드 분석
+        run: flutter analyze -v
+        env:
+          ANDROID_HOME: /home/ming/sdk
+          JAVA_HOME: /home/ming/.java/jdk-23.0.2
+          PATH: /home/ming/sdk/platform-tools:/home/ming/sdk/emulator:/home/ming/.flutter/bin:/home/ming/.flutter/bin/cache/dart-sdk/bin:/usr/bin:/bin
+
+#- name: 테스트 실행
+      #  run: flutter test
+      #  env:
+      #    ANDROID_HOME: /home/ming/sdk
+      #    JAVA_HOME: /home/ming/.java/jdk-23.0.2
+      #    PATH: /home/ming/sdk/platform-tools:/home/ming/sdk/emulator:/home/ming/.flutter/bin:/home/ming/.flutter/bin/cache/dart-sdk/bin:/usr/bin:/bin
+
+      - name: KST 시간 기준 파일명 준비
+        id: timestamp
+        run: |
+          echo "filename=app-release-$(TZ='Asia/Seoul' date +'%Y%m%d-%H%M').apk" >> $GITHUB_OUTPUT
+
+      - name: Android APK 빌드
+        run: flutter build apk -v
+        env:
+          ANDROID_HOME: /home/ming/sdk
+          JAVA_HOME: /home/ming/.java/jdk-23.0.2
+          PATH: /home/ming/sdk/platform-tools:/home/ming/sdk/emulator:/home/ming/.flutter/bin:/home/ming/.flutter/bin/cache/dart-sdk/bin:/usr/bin:/bin
+
+      - name: APK 파일명 변경 (KST 기준)
+        run: mv build/app/outputs/flutter-apk/app-release.apk build/app/outputs/flutter-apk/${{ steps.timestamp.outputs.filename }}
+
+      - name: 빌드된 APK 아티팩트 업로드
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ steps.timestamp.outputs.filename }}
+          path: build/app/outputs/flutter-apk/${{ steps.timestamp.outputs.filename }}
+
+
+      # 필요 시 iOS 빌드는 다음과 같이 추가할 수 있음 (Mac 러너에서만 동작)
+      # - name: iOS 빌드
+      #   run: flutter build ios --no-codesign

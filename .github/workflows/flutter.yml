@@ -44,8 +44,8 @@ jobs:
           echo "/home/ming/.flutter/bin/cache/dart-sdk/bin" >> $GITHUB_PATH
       
       
-      - name: 플러터 분석 비활성화
-        run: flutter config --no-analytics
+      # - name: 플러터 분석 비활성화
+      #   run: flutter config --no-analytics
 
       - name: 디버그 환경 정보 출력
         run: |

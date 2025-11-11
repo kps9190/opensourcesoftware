@@ -6,9 +6,9 @@ void main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
-  WidgetsFlutterBinding.ensureInitialized(); // runApp 실행 이전이면 필요
+  WidgetsFlutterBinding.ensureInitialized();
   await FlutterNaverMap().init(
-          clientId: '방금 발급받은 Client ID',
+          clientId: 'gflswadwll',
           onAuthFailed: (ex) {
             switch (ex) {
               case NQuotaExceededException(:final message):

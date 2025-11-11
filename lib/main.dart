@@ -1,9 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:flutter_naver_map/flutter_naver_map.dart';
 
-void main() {
+void main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+
+  WidgetsFlutterBinding.ensureInitialized(); // runApp 실행 이전이면 필요
+  await FlutterNaverMap().init(
+          clientId: '방금 발급받은 Client ID',
+          onAuthFailed: (ex) {
+            switch (ex) {
+              case NQuotaExceededException(:final message):
+                print("사용량 초과 (message: $message)");
+                break;
+              case NUnauthorizedClientException() ||
+              NClientUnspecifiedException() ||
+              NAnotherAuthFailedException():
+                print("인증 실패: $ex");
+                break;
+            }
+          });
+
   runApp(const MyApp());
 }
 
@@ -45,17 +63,28 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const markerLocation = NLatLng(37.5666, 126.979);
+    final safeAreaPadding = MediaQuery.paddingOf(context);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(title),
       ),
-      body: const Center(
-        child: Text(
-          '메인화면',
-          style: TextStyle(fontSize: 20),
-        ),
+      body: NaverMap(
+        options: NaverMapViewOptions(
+        contentPadding: safeAreaPadding, // 화면의 SafeArea에 중요 지도 요소가 들어가지 않도록 설정하는 Padding. 필요한 경우에만 사용하세요.
+        initialCameraPosition: NCameraPosition(target: markerLocation, zoom: 14),
       ),
+      onMapReady: (controller) {
+        final marker = NMarker(
+          id: "city_hall", // Required
+          position: markerLocation, // Required
+          caption: NOverlayCaption(text: "서울시청"), // Optional
+        );
+        controller.addOverlay(marker); // 지도에 마커를 추가
+        print("naver map is ready!");
+      },
+    ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         showSelectedLabels: true,

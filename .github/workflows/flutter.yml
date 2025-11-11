@@ -14,18 +14,29 @@ jobs:
       - name: 저장소 확인
         uses: actions/checkout@v4
 
-      - name: Gradle & Flutter 캐시 복원
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~/.gradle/wrapper
-            ~/.gradle/caches
-            ~/.pub-cache
-            .dart_tool
-            build
-          key: build-cache-${{ runner.os }}-${{ hashFiles('**/pubspec.lock') }}
-          restore-keys: |
-            build-cache-${{ runner.os }}-
+      - name: 캐시 디렉토리 확인 (디버그용)
+        run: |
+          echo "Gradle cache:"
+          du -sh ~/.gradle || true
+          echo "Pub cache:"
+          du -sh ~/.pub-cache || true
+          echo ".dart_tool:"
+          du -sh .dart_tool || true
+          echo "build:"
+          du -sh build || true
+
+      # - name: Gradle & Flutter 캐시 복원
+      #   uses: actions/cache@v4
+      #   with:
+      #     path: |
+      #       ~/.gradle/wrapper
+      #       ~/.gradle/caches
+      #       ~/.pub-cache
+      #       .dart_tool
+      #       build
+      #     key: build-cache-${{ runner.os }}-${{ hashFiles('**/pubspec.lock') }}
+      #     restore-keys: |
+      #       build-cache-${{ runner.os }}-
 
       - name: Flutter 경로 등록
         run: |
@@ -95,16 +106,16 @@ jobs:
           name: ${{ steps.timestamp.outputs.filename }}
           path: build/app/outputs/flutter-apk/${{ steps.timestamp.outputs.filename }}
 
-      - name: 캐시 저장 (Gradle & Flutter)
-        uses: actions/cache/save@v4
-        with:
-          path: |
-            ~/.gradle/wrapper
-            ~/.gradle/caches
-            ~/.pub-cache
-            .dart_tool
-            build
-          key: build-cache-${{ runner.os }}-${{ hashFiles('**/pubspec.lock') }}
+      # - name: 캐시 저장 (Gradle & Flutter)
+      #   uses: actions/cache/save@v4
+      #   with:
+      #     path: |
+      #       ~/.gradle/wrapper
+      #       ~/.gradle/caches
+      #       ~/.pub-cache
+      #       .dart_tool
+      #       build
+      #     key: build-cache-${{ runner.os }}-${{ hashFiles('**/pubspec.lock') }}
 
       # 필요 시 iOS 빌드는 다음과 같이 추가할 수 있음 (Mac 러너에서만 동작)
       # - name: iOS 빌드

@@ -22,7 +22,7 @@ class _MyAppState extends State<MyApp> {
   }
 
   Future<void> _initializeApp() async {
-    await Future.delayed(const Duration(seconds: 3)); // 로딩 대체
+    await Future.delayed(const Duration(seconds: 3)); // 로딩 대체용
     FlutterNativeSplash.remove(); // 스플래시 제거
   }
 
@@ -39,26 +39,22 @@ class _MyAppState extends State<MyApp> {
   }
 }
 
-class MyHomePage extends StatefulWidget {
+class MyHomePage extends StatelessWidget {
   const MyHomePage({super.key, required this.title});
   final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
+        title: Text(title),
       ),
       body: const Center(
-        child: Text('메인화면'),
+        child: Text(
+          '메인화면',
+          style: TextStyle(fontSize: 20),
+        ),
       ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
@@ -66,18 +62,24 @@ class _MyHomePageState extends State<MyHomePage> {
         showUnselectedLabels: true,
         selectedItemColor: Colors.black,
         unselectedItemColor: Colors.grey,
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: '홈'),
-          BottomNavigationBarItem(icon: Icon(Icons.settings), label: '관리자 설정'),
-          BottomNavigationBarItem(icon: Icon(Icons.place), label: '내 주변'),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: '내 정보'),
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: '홈',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings),
+            label: '관리자 설정',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.place),
+            label: '내 주변',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: '내 정보',
+          ),
         ],
-        currentIndex: _currentIndex,
-        onTap: (index) {
-          setState(() {
-            _currentIndex = index;
-          });
-        },
       ),
     );
   }

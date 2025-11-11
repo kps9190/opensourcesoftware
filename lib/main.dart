@@ -6,22 +6,22 @@ void main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
-  WidgetsFlutterBinding.ensureInitialized();
   await FlutterNaverMap().init(
           clientId: 'gflswadwll',
-          onAuthFailed: (ex) {
-            switch (ex) {
+          onAuthFailed: (failed) {
+            switch (failed) {
               case NQuotaExceededException(:final message):
                 print("사용량 초과 (message: $message)");
                 break;
               case NUnauthorizedClientException() ||
               NClientUnspecifiedException() ||
               NAnotherAuthFailedException():
-                print("인증 실패: $ex");
+                print("인증 실패: $failed");
                 break;
             }
           });
 
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 
@@ -41,7 +41,7 @@ class _MyAppState extends State<MyApp> {
 
   Future<void> _initializeApp() async {
     await Future.delayed(const Duration(seconds: 3)); // 로딩 대체용
-    FlutterNativeSplash.remove(); // 스플래시 제거
+    FlutterNativeSplash.remove(); 
   }
 
   @override
@@ -77,12 +77,10 @@ class MyHomePage extends StatelessWidget {
       ),
       onMapReady: (controller) {
         final marker = NMarker(
-          id: "city_hall", // Required
-          position: markerLocation, // Required
-          caption: NOverlayCaption(text: "서울시청"), // Optional
+          id: "markerLocation",
+          position: markerLocation,
         );
         controller.addOverlay(marker); // 지도에 마커를 추가
-        print("naver map is ready!");
       },
     ),
       bottomNavigationBar: BottomNavigationBar(
@@ -97,12 +95,12 @@ class MyHomePage extends StatelessWidget {
             label: '홈',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: '관리자 설정',
-          ),
-          BottomNavigationBarItem(
             icon: Icon(Icons.place),
             label: '내 주변',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings),
+            label: '관리자 설정',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),

@@ -53,7 +53,11 @@ jobs:
       
       # Flutter analytics 완전히 비활성화 (분석 에러 방지)
       - name: Disable Flutter analytics
-        run: flutter config --no-analytics
+        run: |
+          mkdir -p /home/ming/.flutter_user_dir
+          export FLUTTER_USER_HOME=/home/ming/.flutter_user_dir
+          flutter config --no-analytics
+          flutter config --no-cli-analytics        
 
       - name: 디버그 환경 정보 출력
         run: |

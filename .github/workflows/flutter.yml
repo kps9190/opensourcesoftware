@@ -42,6 +42,10 @@ jobs:
         run: |
           echo "/home/ming/.flutter/bin" >> $GITHUB_PATH
           echo "/home/ming/.flutter/bin/cache/dart-sdk/bin" >> $GITHUB_PATH
+      
+      
+      - name: 플러터 분석 비활성화
+        run: flutter config --no-analytics
 
       - name: 디버그 환경 정보 출력
         run: |
@@ -55,6 +59,7 @@ jobs:
         env:
           ANDROID_HOME: /home/ming/sdk
           JAVA_HOME: /home/ming/.java/jdk-23.0.2
+          FLUTTER_USER_HOME: /home/ming/.flutter_user_dir
           PATH: /home/ming/sdk/platform-tools:/home/ming/sdk/emulator:/home/ming/.flutter/bin:/home/ming/.flutter/bin/cache/dart-sdk/bin:/usr/bin:/bin
 
       - name: Flutter 버전 확인
@@ -70,6 +75,7 @@ jobs:
           ANDROID_HOME: /home/ming/sdk
           JAVA_HOME: /home/ming/.java/jdk-23.0.2
           PATH: /home/ming/sdk/platform-tools:/home/ming/sdk/emulator:/home/ming/.flutter/bin:/home/ming/.flutter/bin/cache/dart-sdk/bin:/usr/bin:/bin
+
 
       - name: 코드 분석
         run: flutter analyze -v

@@ -86,6 +86,7 @@ jobs:
       - name: 코드 분석
         run: flutter analyze -v
         env:
+          HOME: /home/ming/tmp_home
           ANDROID_HOME: /home/ming/sdk
           JAVA_HOME: /home/ming/.java/jdk-23.0.2
           PATH: /home/ming/sdk/platform-tools:/home/ming/sdk/emulator:/home/ming/.flutter/bin:/home/ming/.flutter/bin/cache/dart-sdk/bin:/usr/bin:/bin

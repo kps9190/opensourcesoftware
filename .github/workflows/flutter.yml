@@ -57,7 +57,6 @@ jobs:
           mkdir -p /home/ming/.flutter_user_dir
           export FLUTTER_USER_HOME=/home/ming/.flutter_user_dir
           flutter config --no-analytics
-          flutter config --no-cli-analytics        
 
       - name: 디버그 환경 정보 출력
         run: |

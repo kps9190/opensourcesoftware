@@ -1,0 +1,92 @@
+[
+  {
+    "business_request_id": 1,
+    "business_id": 2012345678,
+    "business_name": "해목 논현점",
+    "business_category": "일식",
+    "business_hours": "10:00~22:00",
+    "business_lat": 37.5110,
+    "business_lng": 127.0403
+  },
+  {
+    "business_request_id": 2,
+    "business_id": 2098765432,
+    "business_name": "홍콩반점 강남역점",
+    "business_category": "중식",
+    "business_hours": "11:00~21:00",
+    "business_lat": 37.4981,
+    "business_lng": 127.0276
+  },
+  {
+    "business_request_id": 3,
+    "business_id": 2056789123,
+    "business_name": "부산아구찜 서초본점",
+    "business_category": "한식",
+    "business_hours": "10:00~23:00",
+    "business_lat": 37.4902,
+    "business_lng": 127.0153
+  },
+  {
+    "business_request_id": 4,
+    "business_id": 2071234567,
+    "business_name": "버거킹 교대역점",
+    "business_category": "양식",
+    "business_hours": "09:00~24:00",
+    "business_lat": 37.4934,
+    "business_lng": 127.0146
+  },
+  {
+    "business_request_id": 5,
+    "business_id": 2039876543,
+    "business_name": "스타벅스 삼성중앙점",
+    "business_category": "카페",
+    "business_hours": "07:00~22:00",
+    "business_lat": 37.5143,
+    "business_lng": 127.0592
+  },
+  {
+    "business_request_id": 6,
+    "business_id": 2065432198,
+    "business_name": "빽다방 신논현역점",
+    "business_category": "카페",
+    "business_hours": "08:00~21:00",
+    "business_lat": 37.5043,
+    "business_lng": 127.0248
+  },
+  {
+    "business_request_id": 7,
+    "business_id": 2055555555,
+    "business_name": "멕시카나치킨 역삼점",
+    "business_category": "치킨",
+    "business_hours": "11:00~23:30",
+    "business_lat": 37.5017,
+    "business_lng": 127.0363
+  },
+  {
+    "business_request_id": 8,
+    "business_id": 2044444444,
+    "business_name": "교촌치킨 논현본점",
+    "business_category": "치킨",
+    "business_hours": "11:00~23:00",
+    "business_lat": 37.5142,
+    "business_lng": 127.0335
+  },
+  {
+    "business_request_id": 9,
+    "business_id": 2022222222,
+    "business_name": "이디야커피 강남대로점",
+    "business_category": "카페",
+    "business_hours": "08:00~22:00",
+    "business_lat": 37.4943,
+    "business_lng": 127.0290
+  },
+  {
+    "business_request_id": 10,
+    "business_id": 2099999999,
+    "business_name": "한솥도시락 선릉점",
+    "business_category": "한식",
+    "business_hours": "09:00~22:00",
+    "business_lat": 37.5070,
+    "business_lng": 127.0480
+  }
+]

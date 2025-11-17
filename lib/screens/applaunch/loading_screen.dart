@@ -1,7 +1,6 @@
 // lib/applaunch/loading_screen.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
-import '../nearby/mapscreen.dart';
 
 class LoadingScreen extends StatefulWidget {
   const LoadingScreen({super.key});
@@ -22,11 +21,9 @@ class _LoadingScreenState extends State<LoadingScreen> {
     await Future.delayed(const Duration(seconds: 2));
     FlutterNativeSplash.remove();
 
-    // MapScreen으로 이동
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (_) => const MapScreen()),
-    );
+    if (mounted) {
+      Navigator.pushReplacementNamed(context, '/maps');
+    }
   }
 
   @override

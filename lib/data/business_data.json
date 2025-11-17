@@ -1,0 +1,112 @@
+[
+  {
+    "business_id": 2012345678,
+    "business_owner_id": 2,
+    "business_name": "해목 논현점",
+    "business_category": "일식",
+    "business_address": "서울 강남구 선릉로",
+    "business_hours": "10:00~22:00",
+    "business_description": "일식 전문점",
+    "business_lat": 37.5110,
+    "business_lng": 127.0403
+  },
+  {
+    "business_id": 2203456789,
+    "business_owner_id": 3,
+    "business_name": "청와옥 방이점",
+    "business_category": "한식",
+    "business_address": "서울 송파구 방이동",
+    "business_hours": "10:30~21:30",
+    "business_description": "한식 전문점",
+    "business_lat": 37.5103,
+    "business_lng": 127.1243
+  },
+  {
+    "business_id": 2304567890,
+    "business_owner_id": 4,
+    "business_name": "라라브레드 망원",
+    "business_category": "브런치/빵",
+    "business_address": "서울 마포구 망원동",
+    "business_hours": "09:00~20:00",
+    "business_description": "브런치/빵 전문점",
+    "business_lat": 37.5548,
+    "business_lng": 126.9047
+  },
+  {
+    "business_id": 2405678901,
+    "business_owner_id": 5,
+    "business_name": "남산와이너리",
+    "business_category": "파인다이닝",
+    "business_address": "서울 용산구",
+    "business_hours": "11:30~22:00",
+    "business_description": "유러피안 다이닝",
+    "business_lat": 37.5400,
+    "business_lng": 126.9946
+  },
+  {
+    "business_id": 2506789012,
+    "business_owner_id": 6,
+    "business_name": "교토마치 초밥",
+    "business_category": "오마카세",
+    "business_address": "서울 강남구",
+    "business_hours": "12:00~22:00",
+    "business_description": "정통 에도마에 초밥",
+    "business_lat": 37.4979,
+    "business_lng": 127.0276
+  },
+  {
+    "business_id": 2607890123,
+    "business_owner_id": 7,
+    "business_name": "쇼니노 수성구점",
+    "business_category": "카페",
+    "business_address": "대구 수성구",
+    "business_hours": "10:00~21:00",
+    "business_description": "브런치 카페",
+    "business_lat": 35.8302,
+    "business_lng": 128.6297
+  },
+  {
+    "business_id": 2708901234,
+    "business_owner_id": 8,
+    "business_name": "수변최고집",
+    "business_category": "고기",
+    "business_address": "대구 동구",
+    "business_hours": "11:00~22:00",
+    "business_description": "고기 전문점",
+    "business_lat": 35.8851,
+    "business_lng": 128.6305
+  },
+  {
+    "business_id": 2809012345,
+    "business_owner_id": 9,
+    "business_name": "스시히어로",
+    "business_category": "초밥",
+    "business_address": "부산 해운대구",
+    "business_hours": "12:00~22:00",
+    "business_description": "초밥 전문점",
+    "business_lat": 35.1631,
+    "business_lng": 129.1635
+  },
+  {
+    "business_id": 2901234567,
+    "business_owner_id": 10,
+    "business_name": "이재모피자",
+    "business_category": "피자",
+    "business_address": "대구 중구",
+    "business_hours": "11:00~21:00",
+    "business_description": "피자·양식 전문점",
+    "business_lat": 35.8683,
+    "business_lng": 128.5943
+  },
+  {
+    "business_id": 3002345678,
+    "business_owner_id": 11,
+    "business_name": "덕담집",
+    "business_category": "한식",
+    "business_address": "인천 부평구",
+    "business_hours": "10:00~22:00",
+    "business_description": "한식·정식 전문점",
+    "business_lat": 37.5071,
+    "business_lng": 126.7216
+  }
+]

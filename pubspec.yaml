@@ -32,6 +32,12 @@ flutter:
     - assets/jsons/
     - assets/lottie/
     - assets/splash/
+    - lib/data/business_data.json
+    - lib/data/menu_data.json
+    - lib/data/user_data.json
+    - lib/data/voc_data.json
+    - lib/data/business_registration_list.json
+
 
 flutter_native_splash:
   background_image: assets/splash/splash_background.jpg

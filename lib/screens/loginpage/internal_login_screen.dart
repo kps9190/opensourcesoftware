@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'signup.dart';
 
-class EmailLoginScreen extends StatelessWidget {
-  const EmailLoginScreen({super.key});
+class InternalLoginScreen extends StatelessWidget {
+  const InternalLoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,10 @@ class EmailLoginScreen extends StatelessWidget {
               ' 이메일로 로그인',
               style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800),
             ),
+
             const SizedBox(height: 13),
+
+            // 이메일 입력
             const TextField(
               decoration: InputDecoration(
                 hintText: '이메일 입력',
@@ -28,7 +31,10 @@ class EmailLoginScreen extends StatelessWidget {
                 border: OutlineInputBorder(),
               ),
             ),
+
             const SizedBox(height: 12),
+
+            // 비밀번호 입력
             const TextField(
               obscureText: true,
               decoration: InputDecoration(
@@ -40,7 +46,10 @@ class EmailLoginScreen extends StatelessWidget {
                 border: OutlineInputBorder(),
               ),
             ),
+
             const SizedBox(height: 25),
+
+            // 로그인 버튼
             SizedBox(
               width: double.infinity,
               height: 48,
@@ -58,7 +67,10 @@ class EmailLoginScreen extends StatelessWidget {
                 ),
               ),
             ),
+
             const SizedBox(height: 25),
+
+            // 이메일 찾기 / 비밀번호 재설정 / 회원가입
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -70,6 +82,8 @@ class EmailLoginScreen extends StatelessWidget {
                 const SizedBox(width: 12),
                 const Text('|', style: TextStyle(color: Colors.grey)),
                 const SizedBox(width: 12),
+
+                // 회원가입 이동
                 MouseRegion(
                   cursor: SystemMouseCursors.click,
                   child: GestureDetector(

@@ -2,9 +2,9 @@ name: 플러터 테스트 및 빌드
 
 on:
   push:
-    branches: [Hong2]
+    branches: [admin]
   pull_request:
-    branches: [Hong2]
+    branches: [admin]
 
 jobs:
   build:

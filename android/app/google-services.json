@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "95063495910",
+    "project_id": "dahee-flutter-lecture",
+    "storage_bucket": "dahee-flutter-lecture.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:95063495910:android:5af4ed236e92264746d727",
+        "android_client_info": {
+          "package_name": "com.example.flutter_fb"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBI-KR1PT1qlRTBfX8iQP_VX6yp0yuOYCE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

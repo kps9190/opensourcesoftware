@@ -30,7 +30,7 @@ class _AdminBusinessRequestScreenState
         requestList = data;
       });
     } catch (e) {
-      print("JSON 로딩 실패: $e");
+      print("로딩 실패: $e");
     }
   }
 

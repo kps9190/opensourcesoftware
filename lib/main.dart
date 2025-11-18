@@ -5,6 +5,10 @@ import 'package:flutter_naver_map/flutter_naver_map.dart';
 
 import './screens/applaunch/loading_screen.dart';
 import './screens/search/category_and_price.dart';
+import './screens/loginpage/main_login_screen.dart';
+import './screens/user/mypage.dart';
+import './screens/adminpage/admin_page_test.dart';
+
 import 'screens/search/map_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
@@ -37,7 +41,9 @@ class MyApp extends StatelessWidget {
       routes: {
         '/categoryandprice': (context) => const CategoryAndPriceScreen(),
         '/maps': (context) => const MapScreen(),
-        // '/mypage': (context) => const MyPageScreen(),
+        '/login': (context) => const LoginScreen(),
+        '/mypage': (context) => const MyPageScreen(),
+        '/adminpage': (context) => const AdminPageTest(),
       },
     );
   }

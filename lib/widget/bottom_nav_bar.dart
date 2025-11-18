@@ -1,8 +1,4 @@
 import 'package:flutter/material.dart';
-import '../screens/adminpage/admin_page_test.dart';
-import '../screens/search/map_screen.dart';
-import '../screens/user/mypage.dart';
-import '../screens/search/category_and_price.dart';
 
 class BottomNavBar extends StatelessWidget {
   final int currentIndex;
@@ -21,30 +17,22 @@ class BottomNavBar extends StatelessWidget {
       type: BottomNavigationBarType.fixed,
 
       onTap: (index) {
-        if (index == currentIndex) return; 
-
-        Widget target;
+        if (index == currentIndex) return;
 
         switch (index) {
           case 0:
-            target = const CategoryAndPriceScreen();
+            Navigator.pushReplacementNamed(context, '/categoryandprice');
             break;
           case 1:
-            target = const MapScreen();
+            Navigator.pushReplacementNamed(context, '/maps');
             break;
           case 2:
-            target = const AdminPageTest();
+            Navigator.pushReplacementNamed(context, '/adminpage');
             break;
           case 3:
-            target = const MyPageScreen();
+            Navigator.pushReplacementNamed(context, '/mypage');
             break;
-          default:
-            return;
         }
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (_) => target),
-        );
       },
 
       items: const [

@@ -39,19 +39,10 @@ class _LoginLogo extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Image.asset(
-              'assets/images/tabling.jpg',
+              'assets/images/login_symbol_big.png',
               width: 120,
               height: 120,
               fit: BoxFit.contain,
-            ),
-            const SizedBox(height: 10),
-            const Text(
-              '테이블링',
-              style: TextStyle(
-                fontSize: 28,
-                fontWeight: FontWeight.w600,
-                color: Colors.black,
-              ),
             ),
           ],
         ),

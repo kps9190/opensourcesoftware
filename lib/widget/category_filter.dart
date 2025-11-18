@@ -7,13 +7,20 @@ class CategoryFilterBar extends StatelessWidget {
 
   static const List<Map<String, dynamic>> filters = [
     {'label': '한식', 'icon': Icons.rice_bowl},
-    {'label': '양식', 'icon': Icons.restaurant},
     {'label': '일식', 'icon': Icons.set_meal},
     {'label': '중식', 'icon': Icons.ramen_dining},
-    {'label': '카페', 'icon': Icons.local_cafe},
-    {'label': '해산물', 'icon': Icons.lunch_dining},
-    {'label': '뷔페', 'icon': Icons.food_bank},
+    {'label': '양식', 'icon': Icons.restaurant},
     {'label': '아시아식', 'icon': Icons.dinner_dining},
+    {'label': '해산물', 'icon': Icons.lunch_dining},
+    {'label': '고기', 'icon': Icons.outdoor_grill},
+    {'label': '파인다이닝', 'icon': Icons.wine_bar},
+    {'label': '카페', 'icon': Icons.local_cafe},
+    {'label': '디저트', 'icon': Icons.icecream},
+    {'label': '베이커리', 'icon': Icons.cake},
+    {'label': '펍/바', 'icon': Icons.local_bar},
+    {'label': '뷔페', 'icon': Icons.food_bank},
+    {'label': '샐러드', 'icon': Icons.eco},
+    {'label': '분식', 'icon': Icons.rice_bowl},
   ];
 
   const CategoryFilterBar({

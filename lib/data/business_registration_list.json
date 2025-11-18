@@ -57,7 +57,7 @@
     "business_request_id": 7,
     "business_id": 2055555555,
     "business_name": "멕시카나치킨 역삼점",
-    "business_category": "치킨",
+    "business_category": "고기",
     "business_hours": "11:00~23:30",
     "business_lat": 37.5017,
     "business_lng": 127.0363
@@ -66,7 +66,7 @@
     "business_request_id": 8,
     "business_id": 2044444444,
     "business_name": "교촌치킨 논현본점",
-    "business_category": "치킨",
+    "business_category": "고기",
     "business_hours": "11:00~23:00",
     "business_lat": 37.5142,
     "business_lng": 127.0335

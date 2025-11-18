@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../widgets/dashboard_header.dart';
-import '../widgets/dashboard_guide_card.dart';
-import '../widgets/wait_status_card.dart';
+import '../../widget/dashboard_header.dart';
+import '../../widget/dashboard_guide_card.dart';
+import '../../widget/wait_status_card.dart';
 import './waiting_list_page.dart';
 
 class StoreDashboardPage extends StatelessWidget {

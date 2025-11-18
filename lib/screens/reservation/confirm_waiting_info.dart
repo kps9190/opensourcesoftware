@@ -5,7 +5,7 @@ class WaitingConfirmPage extends StatelessWidget {
   final int teamCount;
   final int peopleCount;
 
-  const WaitingConfirmPage({
+  const WaitingConfirmPage({super.key, 
     required this.waitingType,
     required this.teamCount,
     required this.peopleCount,

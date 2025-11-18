@@ -1,0 +1,35 @@
+mutation CreateUser @auth(level: USER, insecureReason: "This operation is safe to expose to all logged in users.") {
+  user_insert(data: {
+    id_expr: "uuidV4()",
+    createdAt_expr: "request.time",
+    displayName: "New User",
+    email: "newuser@example.com"
+  })
+}
+
+query ListRestaurants @auth(level: PUBLIC, insecureReason: "This operation is safe to expose to the public") {
+  restaurants {
+    id
+    name
+    cuisineType
+    city
+  }
+}
+
+mutation UpdateReservationNotes($id: UUID!, $notes: String) @auth(level: USER, insecureReason: "This operation is safe to expose to all logged in users.") {
+  reservation_update(
+    id: $id,
+    data: {
+      notes: $notes
+    }
+  )
+}
+
+query GetRestaurantTables($restaurantId: UUID!) @auth(level: PUBLIC, insecureReason: "This operation is safe to expose to the public") {
+  tables(where: {restaurantId: {eq: $restaurantId}}) {
+    id
+    tableNumber
+    capacity
+    locationDescription
+  }
+}

@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class AdminCustomerScreen extends StatefulWidget {
+  const AdminCustomerScreen({super.key});
+
   @override
   State<AdminCustomerScreen> createState() => _AdminCustomerScreenState();
 }

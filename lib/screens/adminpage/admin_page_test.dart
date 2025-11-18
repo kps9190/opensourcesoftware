@@ -13,13 +13,13 @@ class AdminPageTest extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Admin Page Test"),
+        title: const Text("관리자 페이지"),
       ),
       body: ListView(
         padding: const EdgeInsets.all(20),
         children: [
           const Text(
-            "관리자 페이지 접근 테스트",
+            "관리자 페이지",
             style: TextStyle(
               fontSize: 22,
               fontWeight: FontWeight.bold,
@@ -28,7 +28,6 @@ class AdminPageTest extends StatelessWidget {
 
           const SizedBox(height: 20),
 
-          // 1) VOC 페이지 이동
           ElevatedButton(
             onPressed: () {
               Navigator.push(
@@ -39,12 +38,11 @@ class AdminPageTest extends StatelessWidget {
             style: ElevatedButton.styleFrom(
               minimumSize: const Size(double.infinity, 48),
             ),
-            child: const Text("VOC 관리 페이지 이동"),
+            child: const Text("VOC 관리"),
           ),
 
           const SizedBox(height: 12),
 
-          // 2) 사업체 등록 신청 관리 이동
           ElevatedButton(
             onPressed: () {
               Navigator.push(
@@ -55,12 +53,11 @@ class AdminPageTest extends StatelessWidget {
             style: ElevatedButton.styleFrom(
               minimumSize: const Size(double.infinity, 48),
             ),
-            child: const Text("사업체 등록 신청 관리 이동"),
+            child: const Text("사업체 등록 신청 관리"),
           ),
 
           const SizedBox(height: 12),
 
-          // 3) 사업장 관리 이동
           ElevatedButton(
             onPressed: () {
               Navigator.push(
@@ -71,12 +68,11 @@ class AdminPageTest extends StatelessWidget {
             style: ElevatedButton.styleFrom(
               minimumSize: const Size(double.infinity, 48),
             ),
-            child: const Text("사업장 관리 이동"),
+            child: const Text("사업장 관리"),
           ),
 
           const SizedBox(height: 12),
 
-          // 4) 고객 관리 이동
           ElevatedButton(
             onPressed: () {
               Navigator.push(
@@ -87,7 +83,7 @@ class AdminPageTest extends StatelessWidget {
             style: ElevatedButton.styleFrom(
               minimumSize: const Size(double.infinity, 48),
             ),
-            child: const Text("고객 관리 페이지 이동"),
+            child: const Text("고객 관리"),
           ),
         ],
       ),

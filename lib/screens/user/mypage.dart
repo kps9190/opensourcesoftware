@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../../widget/bottom_nav_bar.dart';
 import '../loginpage/main_login_screen.dart';
 
-Map<String, dynamic>? currentUser = null;
+Map<String, dynamic>? currentUser;
 
 final List<Map<String, dynamic>> waitingJson = [
   {

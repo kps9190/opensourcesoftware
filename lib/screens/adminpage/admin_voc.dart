@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:flutter/services.dart';
 
 class AdminVocScreen extends StatefulWidget {
+  const AdminVocScreen({super.key});
+
   @override
   State<AdminVocScreen> createState() => _AdminVocScreenState();
 }

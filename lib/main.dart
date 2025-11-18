@@ -4,13 +4,17 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 
 import './screens/applaunch/loading_screen.dart';
-
 import './screens/search/category_and_price.dart';
 import 'screens/search/map_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
 void main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+    await Firebase.initializeApp(
+          options: DefaultFirebaseOptions.currentPlatform,
+          );
 
   await FlutterNaverMap().init(clientId: 'gflswadwll');
 

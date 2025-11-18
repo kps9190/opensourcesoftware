@@ -5,7 +5,7 @@ class VisitorCountPage extends StatefulWidget {
   final String waitingType;
   final int teamCount;
 
-  const VisitorCountPage({required this.waitingType, required this.teamCount});
+  const VisitorCountPage({super.key, required this.waitingType, required this.teamCount});
 
   @override
   State<VisitorCountPage> createState() => _VisitorCountPageState();

@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class AdminBusinessManageScreen extends StatefulWidget {
+  const AdminBusinessManageScreen({super.key});
+
   @override
   State<AdminBusinessManageScreen> createState() =>
       _AdminBusinessManageScreenState();

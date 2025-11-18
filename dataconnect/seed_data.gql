@@ -1,0 +1,106 @@
+mutation CreateSeedData @transaction @auth(level: PUBLIC, insecureReason: "This operation is used to seed the database with example data.") {
+  user_insertMany(data: [
+    {
+      id: "550e8400-e29b-41d4-a716-446655440000",
+      displayName: "demouser1",
+      email: "demouser1@example.com",
+      createdAt: "2024-04-26T12:00:00Z",
+      isRestaurantOwner: false
+    },
+    {
+      id: "550e8400-e29b-41d4-a716-446655440001",
+      displayName: "demouser2",
+      email: "demouser2@example.com",
+      createdAt: "2024-04-26T13:00:00Z",
+      isRestaurantOwner: true
+    }
+  ])
+  restaurant_insertMany(data: [
+    {
+      id: "650e8400-e29b-41d4-a716-446655440002",
+      ownerId: "550e8400-e29b-41d4-a716-446655440001",
+      name: "Demo Restaurant 1",
+      address: "123 Main St",
+      city: "Anytown",
+      state: "CA",
+      zipCode: "91234",
+      cuisineType: "Italian",
+      phoneNumber: "555-1212"
+    },
+    {
+      id: "750e8400-e29b-41d4-a716-446655440003",
+      ownerId: "550e8400-e29b-41d4-a716-446655440001",
+      name: "Demo Restaurant 2",
+      address: "456 Elm St",
+      city: "Anytown",
+      state: "CA",
+      zipCode: "91234",
+      cuisineType: "Mexican",
+      phoneNumber: "555-1313"
+    }
+  ])
+  table_insertMany(data: [
+    {
+      id: "850e8400-e29b-41d4-a716-446655440004",
+      restaurantId: "650e8400-e29b-41d4-a716-446655440002",
+      capacity: 4,
+      tableNumber: 1
+    },
+    {
+      id: "950e8400-e29b-41d4-a716-446655440005",
+      restaurantId: "750e8400-e29b-41d4-a716-446655440003",
+      capacity: 6,
+      tableNumber: 2
+    }
+  ])
+  menuCategory_insertMany(data: [
+    {
+      id: "a50e8400-e29b-41d4-a716-446655440006",
+      restaurantId: "650e8400-e29b-41d4-a716-446655440002",
+      name: "Appetizers",
+      order: 1
+    },
+    {
+      id: "b50e8400-e29b-41d4-a716-446655440007",
+      restaurantId: "750e8400-e29b-41d4-a716-446655440003",
+      name: "Main Courses",
+      order: 2
+    }
+  ])
+  menuItem_insertMany(data: [
+    {
+      id: "c50e8400-e29b-41d4-a716-446655440008",
+      categoryId: "a50e8400-e29b-41d4-a716-446655440006",
+      name: "Bruschetta",
+      price: 8.99
+    },
+    {
+      id: "d50e8400-e29b-41d4-a716-446655440009",
+      categoryId: "b50e8400-e29b-41d4-a716-446655440007",
+      name: "Enchiladas",
+      price: 12.99
+    }
+  ])
+  reservation_insertMany(data: [
+    {
+      id: "e50e8400-e29b-41d4-a716-446655440010",
+      restaurantId: "650e8400-e29b-41d4-a716-446655440002",
+      tableId: "850e8400-e29b-41d4-a716-446655440004",
+      userId: "550e8400-e29b-41d4-a716-446655440000",
+      createdAt: "2024-04-27T18:00:00Z",
+      reservationTime: "2024-04-28T19:00:00Z",
+      partySize: 2,
+      status: "confirmed"
+    },
+    {
+      id: "f50e8400-e29b-41d4-a716-446655440011",
+      restaurantId: "750e8400-e29b-41d4-a716-446655440003",
+      tableId: "950e8400-e29b-41d4-a716-446655440005",
+      userId: "550e8400-e29b-41d4-a716-446655440000",
+      createdAt: "2024-04-27T19:00:00Z",
+      reservationTime: "2024-04-29T20:00:00Z",
+      partySize: 4,
+      status: "pending"
+    }
+  ])
+}

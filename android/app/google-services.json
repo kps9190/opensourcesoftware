@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "421095890359",
+    "firebase_url": "https://test-a7179-default-rtdb.firebaseio.com",
+    "project_id": "test-a7179",
+    "storage_bucket": "test-a7179.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:421095890359:android:b788ec70808e77d7da9c32",
+        "android_client_info": {
+          "package_name": "com.example.tabeling"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyChM_ZvYeoXdcStGJiVTNWwncO9YYtCgwM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,62 @@
+name: tabeling
+description: "플러터 클론 코딩"
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.11.0-30.0.dev
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.8
+  flutter_naver_map: ^1.4.1+1
+  flutter_native_splash: ^2.4.7
+  flutter_launcher_icons: ^0.14.4
+  flutter_svg: ^2.2.2
+  firebase_core: ^4.2.1
+  firebase_auth: ^6.1.2
+  cloud_firestore: ^6.1.0
+  firebase_storage: ^13.0.4
+  firebase_messaging: ^16.0.4
+  firebase_database: ^12.1.0
+  permission_handler: ^12.0.1
+  geolocator: ^14.0.2
+
+flutter_launcher_icons:
+  android: true
+  image_path: "./assets/icons/tabling_logo_primary.png" # 아이콘 경로
+  adaptive_icon_background: "#FFFFFF" # 안드로이드 적응형 아이콘의 배경색 (하얀색)
+  adaptive_icon_foreground: "assets/icons/tabling_logo_primary.png"# 안드로이드 적응형 아이콘의 전경 이미지 경로
+
+flutter_native_splash:
+    android: true
+    web: true
+
+    color: "#FFFFFF"              # 기본 배경색 (Android 11 이하 + WEB)
+    color_dark: "#111111"         # 다크모드 배경색
+    image: assets/images/login_symbol_big_splash.png  # 기본 스플래시 이미지
+
+    android_12:
+      color: "#FFFFFF" #배경화면 색
+      color_dark: "#111111" # 다크모드일때 배경화면 색
+      image: assets/images/login_symbol_big_splash.png
+      icon_background_color: "#FFFFFF"
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  assets:
+    - assets/data/
+    - assets/icons/
+    - assets/images/
+    - assets/jsons/
+    - assets/sounds/
+
+  uses-material-design: true
+

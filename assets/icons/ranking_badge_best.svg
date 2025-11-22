@@ -1,0 +1,16 @@
+<svg width="22" height="21" viewBox="0 0 22 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <mask id="path-1-inside-1_5872_16314" fill="white">
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M4 0C1.79086 0 0 1.79086 0 4V17V21L11 17.7692L22 21V17V4C22 1.79086 20.2091 0 18 0H4Z"/>
+    </mask>
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M4 0C1.79086 0 0 1.79086 0 4V17V21L11 17.7692L22 21V17V4C22 1.79086 20.2091 0 18 0H4Z" fill="url(#paint0_linear_5872_16314)"/>
+    <path d="M0 21H-0.4V21.5344L0.112721 21.3838L0 21ZM11 17.7692L11.1127 17.3854L11 17.3523L10.8873 17.3854L11 17.7692ZM22 21L21.8873 21.3838L22.4 21.5344V21H22ZM0.4 4C0.4 2.01177 2.01178 0.4 4 0.4V-0.4C1.56995 -0.4 -0.4 1.56995 -0.4 4H0.4ZM0.4 17V4H-0.4V17H0.4ZM0.4 21V17H-0.4V21H0.4ZM10.8873 17.3854L-0.112721 20.6162L0.112721 21.3838L11.1127 18.153L10.8873 17.3854ZM22.1127 20.6162L11.1127 17.3854L10.8873 18.153L21.8873 21.3838L22.1127 20.6162ZM21.6 17V21H22.4V17H21.6ZM21.6 4V17H22.4V4H21.6ZM18 0.4C19.9882 0.4 21.6 2.01178 21.6 4H22.4C22.4 1.56995 20.4301 -0.4 18 -0.4V0.4ZM4 0.4H18V-0.4H4V0.4Z" fill="black" fill-opacity="0.16" mask="url(#path-1-inside-1_5872_16314)"/>
+    <defs>
+    <linearGradient id="paint0_linear_5872_16314" x1="-0.250001" y1="-1.5" x2="21" y2="24" gradientUnits="userSpaceOnUse">
+    <stop stop-color="#FF4117"/>
+    <stop offset="0.216429" stop-color="#FF5E3B"/>
+    <stop offset="0.440392" stop-color="#FF4B24"/>
+    <stop offset="0.726855" stop-color="#F2340A"/>
+    <stop offset="1" stop-color="#FF2D00"/>
+    </linearGradient>
+    </defs>
+    </svg>

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'user_edit.dart'; 
 
 class UserDeleteScreen extends StatefulWidget {
-  const UserDeleteScreen({super.key});
+  final Server server;
+
+  const UserDeleteScreen({super.key, required this.server});
 
   @override
   State<UserDeleteScreen> createState() => _UserDeleteScreenState();
@@ -9,6 +12,16 @@ class UserDeleteScreen extends StatefulWidget {
 
 class _UserDeleteScreenState extends State<UserDeleteScreen> {
   bool _agreed = false;
+
+  void _deleteUser() {
+    widget.server.deleteUser();
+
+    Navigator.pop(context); 
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('회원 탈퇴가 완료되었습니다.')),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +44,6 @@ class _UserDeleteScreenState extends State<UserDeleteScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // 빨간 경고 박스
             Container(
               width: double.infinity,
               padding: const EdgeInsets.all(16),
@@ -72,50 +84,30 @@ class _UserDeleteScreenState extends State<UserDeleteScreen> {
 
             const SizedBox(height: 24),
 
-            // 일반 유의사항 리스트
             const Text(
               '• 탈퇴 후 매장 이용 취소 등으로 환불 금액이 발생할 수 있으므로 '
               '테이블링페이 머니와 관련된 정보를 최대 30일간 보관 후 삭제합니다.\n\n'
-              '• 서비스 탈퇴 시 회원 전용 서비스 이용이 불가하며, '
+              '• 서비스 탈퇴 시 회원 전용 서비스 이용이 불가하며 '
               '회원 데이터는 일괄 삭제 처리됩니다.\n\n'
-              '• 서비스 탈퇴 신청 후 탈퇴가 완료되면 계정 정보는 삭제되며 복원이 불가능합니다.',
-              style: TextStyle(
-                fontSize: 14,
-                height: 1.6,
-                color: Colors.black87,
-              ),
+              '• 탈퇴 완료 후 계정 정보는 삭제되며 복원이 불가능합니다.',
+              style: TextStyle(fontSize: 14, height: 1.6),
             ),
 
             const Spacer(),
 
-            // 체크박스
             Row(
               children: [
                 Checkbox(
                   value: _agreed,
-                  activeColor: Colors.orange,
-                  onChanged: (value) {
-                    setState(() {
-                      _agreed = value ?? false;
-                    });
-                  },
+                  onChanged: (v) => setState(() => _agreed = v ?? false),
                 ),
                 const Expanded(
-                  child: Text(
-                    '위 사실을 확인했습니다.',
-                    style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.black87,
-                    ),
-                  ),
+                  child: Text('위 사실을 확인했습니다.',
+                      style: TextStyle(fontSize: 15)),
                 ),
               ],
             ),
 
-            const SizedBox(height: 10),
-
-            // 계정 영구삭제 버튼
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
@@ -134,12 +126,7 @@ class _UserDeleteScreenState extends State<UserDeleteScreen> {
                               TextButton(
                                 onPressed: () {
                                   Navigator.pop(ctx);
-                                  Navigator.pop(context);
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                      content: Text('회원 탈퇴가 완료되었습니다.'),
-                                    ),
-                                  );
+                                  _deleteUser(); // 🔥 Stub delete
                                 },
                                 child: const Text('탈퇴'),
                               ),
@@ -149,20 +136,15 @@ class _UserDeleteScreenState extends State<UserDeleteScreen> {
                       }
                     : null,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor:
-                      _agreed ? Colors.orange : Colors.orange.withOpacity(0.4),
                   padding: const EdgeInsets.symmetric(vertical: 14),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
+                  backgroundColor: _agreed
+                      ? Colors.orange
+                      : Colors.orange.withOpacity(0.4),
                 ),
                 child: const Text(
                   '계정 영구삭제',
                   style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
+                      fontSize: 16, fontWeight: FontWeight.bold),
                 ),
               ),
             ),

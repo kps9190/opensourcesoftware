@@ -172,13 +172,13 @@ class _MainScreenState extends State<MainScreen> {
                 ],
               )
             : _selectedIndex == 4
-            ? const MyHomePage() // ✅ 내정보 탭 클릭 시 이동
-            : Center(
-                child: Text(
-                  _menuNames[_selectedIndex],
-                  style: const TextStyle(fontSize: 24),
-                ),
-              ),
+                ? const MyHomePage()
+                : Center(
+                    child: Text(
+                      _menuNames[_selectedIndex],
+                      style: const TextStyle(fontSize: 24),
+                    ),
+                  ),
       ),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.white,
@@ -199,7 +199,10 @@ class _MainScreenState extends State<MainScreen> {
   }
 }
 
+// =========================
 // 검색 화면
+// =========================
+
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
 
@@ -211,15 +214,8 @@ class _SearchScreenState extends State<SearchScreen> {
   final TextEditingController _controller = TextEditingController();
   String _query = '';
 
-  final List<Map<String, String>> _stores = [
-    {'name': '해목 서촌점', 'address': '서울 종로구 자하문로 26-1'},
-    {'name': '해목 해운대점', 'address': '부산 해운대구 구남로24번길 8 (우동)'},
-    {'name': '해목 논현점', 'address': '서울 강남구 선릉로145길 14 (논현동)'},
-    {'name': '해목 롯데월드몰점', 'address': '서울 송파구 올림픽로 300'},
-    {'name': '해목 대구신세계점', 'address': '대구 동구 동부로 149'},
-    {'name': '해목정 석남점', 'address': '인천 서구 신석로 84'},
-    {'name': '해목정 X 덕담집 부평직영점', 'address': '인천 부평구 화랑로 4'},
-  ];
+  final StoreService _service = StoreService(); // ← 스텁 서비스 사용
+  List<Map<String, String>> _filteredStores = [];
 
   final List<String> recentSearches = ['빕스', '런던베이글'];
   final List<String> popularSearches = [
@@ -235,16 +231,16 @@ class _SearchScreenState extends State<SearchScreen> {
     '빕스 가든',
   ];
 
+  void _onSearch(String value) async {
+    final result = await _service.searchStores(value);
+    setState(() {
+      _query = value;
+      _filteredStores = result;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    final filteredStores = _stores
-        .where(
-          (store) =>
-              store['name']!.contains(_query) ||
-              store['address']!.contains(_query),
-        )
-        .toList();
-
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -257,11 +253,7 @@ class _SearchScreenState extends State<SearchScreen> {
             border: InputBorder.none,
           ),
           autofocus: true,
-          onChanged: (value) {
-            setState(() {
-              _query = value;
-            });
-          },
+          onChanged: _onSearch,
         ),
       ),
       body: Padding(
@@ -326,9 +318,8 @@ class _SearchScreenState extends State<SearchScreen> {
                             '${index + 1}. ${popularSearches[index]}',
                             style: TextStyle(
                               fontSize: 16,
-                              fontWeight: index < 3
-                                  ? FontWeight.bold
-                                  : FontWeight.normal,
+                              fontWeight:
+                                  index < 3 ? FontWeight.bold : FontWeight.normal,
                               color: index < 3 ? Colors.orange : Colors.black87,
                             ),
                           ),
@@ -338,42 +329,69 @@ class _SearchScreenState extends State<SearchScreen> {
                   ],
                 ),
               )
-            : filteredStores.isEmpty
-            ? const Center(
-                child: Text(
-                  '검색 결과가 없습니다.',
-                  style: TextStyle(fontSize: 18, color: Colors.grey),
-                ),
-              )
-            : ListView.builder(
-                itemCount: filteredStores.length,
-                itemBuilder: (context, index) {
-                  final store = filteredStores[index];
-                  return ListTile(
-                    leading: const CircleAvatar(
-                      backgroundColor: Colors.orange,
-                      child: Text('해', style: TextStyle(color: Colors.white)),
+            : _filteredStores.isEmpty
+                ? const Center(
+                    child: Text(
+                      '검색 결과가 없습니다.',
+                      style: TextStyle(fontSize: 18, color: Colors.grey),
                     ),
-                    title: Text(
-                      store['name']!,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.orange,
-                      ),
-                    ),
-                    subtitle: Text(store['address']!),
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const StorePage(),
+                  )
+                : ListView.builder(
+                    itemCount: _filteredStores.length,
+                    itemBuilder: (context, index) {
+                      final store = _filteredStores[index];
+                      return ListTile(
+                        leading: const CircleAvatar(
+                          backgroundColor: Colors.orange,
+                          child: Text('런', style: TextStyle(color: Colors.white)),
                         ),
+                        title: Text(
+                          store['name']!,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.orange,
+                          ),
+                        ),
+                        subtitle: Text(store['address']!),
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const StorePage(),
+                            ),
+                          );
+                        },
                       );
                     },
-                  );
-                },
-              ),
+                  ),
       ),
     );
+  }
+}
+
+// =========================
+// Stub Service (가짜 서버)
+// =========================
+
+class StoreService {
+  final List<Map<String, String>> _storeDB = [
+    {'name': '런던베이글 서촌점', 'address': '서울 종로구 자하문로 26-1'},
+    {'name': '런던베이글 해운대점', 'address': '부산 해운대구 구남로24번길 8'},
+    {'name': '런던베이글 논현점', 'address': '서울 강남구 선릉로145길 14'},
+    {'name': '런던베이글 롯데월드몰점', 'address': '서울 송파구 올림픽로 300'},
+    {'name': '런던베이글 대구신세계점', 'address': '대구 동구 동부로 149'},
+    {'name': '런던베이글 석남점', 'address': '인천 서구 신석로 84'},
+  ];
+
+  Future<List<Map<String, String>>> searchStores(String query) async {
+    await Future.delayed(const Duration(milliseconds: 300)); 
+
+    if (query.isEmpty) return [];
+
+    return _storeDB
+        .where((store) =>
+            store['name']!.contains(query) ||
+            store['address']!.contains(query))
+        .toList();
   }
 }

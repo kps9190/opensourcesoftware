@@ -9,10 +9,23 @@ class UserEditScreen extends StatefulWidget {
 }
 
 class _UserEditScreenState extends State<UserEditScreen> {
-  final _nicknameController = TextEditingController(text: 'DaHee');
-  final _emailController = TextEditingController(text: 'dahee@example.com');
-  final _phoneController = TextEditingController(text: '010-1234-5678');
+  final server = Server(); 
+
+  late TextEditingController _nicknameController;
+  late TextEditingController _emailController;
+  late TextEditingController _phoneController;
   final _passwordController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+
+    final user = server.getUserInfo();
+
+    _nicknameController = TextEditingController(text: user['nickname']);
+    _emailController = TextEditingController(text: user['email']);
+    _phoneController = TextEditingController(text: user['phone']);
+  }
 
   @override
   void dispose() {
@@ -21,6 +34,18 @@ class _UserEditScreenState extends State<UserEditScreen> {
     _phoneController.dispose();
     _passwordController.dispose();
     super.dispose();
+  }
+
+  void _saveUserInfo() {
+    server.updateUserInfo({
+      'nickname': _nicknameController.text,
+      'email': _emailController.text,
+      'phone': _phoneController.text,
+    });
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('정보가 저장되었습니다 :)')),
+    );
   }
 
   @override
@@ -59,7 +84,6 @@ class _UserEditScreenState extends State<UserEditScreen> {
 
           const SizedBox(height: 30),
 
-          // 저장 버튼
           ElevatedButton(
             style: ElevatedButton.styleFrom(
               padding: const EdgeInsets.symmetric(vertical: 14),
@@ -67,11 +91,7 @@ class _UserEditScreenState extends State<UserEditScreen> {
                 borderRadius: BorderRadius.circular(8),
               ),
             ),
-            onPressed: () {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('정보가 저장되었습니다 :)')),
-              );
-            },
+            onPressed: _saveUserInfo,    
             child: const Text('저장하기'),
           ),
 
@@ -85,7 +105,7 @@ class _UserEditScreenState extends State<UserEditScreen> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (_) => const UserDeleteScreen(),
+                      builder: (_) => UserDeleteScreen(server: server),
                     ),
                   );
                 },
@@ -93,7 +113,7 @@ class _UserEditScreenState extends State<UserEditScreen> {
               ),
               TextButton(
                 onPressed: () {
-                  // 로그아웃 기능 (추후 연결)
+                  // 로그아웃 (추후 연결)
                 },
                 child: const Text('로그아웃'),
               ),
@@ -130,5 +150,28 @@ class _UserEditScreenState extends State<UserEditScreen> {
         const SizedBox(height: 16),
       ],
     );
+  }
+}
+
+//Stub Server (가상 서버)
+
+class Server {
+  Map<String, String> _user = {
+    'nickname': 'DaHee',
+    'email': 'dahee@example.com',
+    'phone': '010-1234-5678',
+  };
+
+  Map<String, String> getUserInfo() {
+    return Map.from(_user); 
+  }
+
+  void updateUserInfo(Map<String, String> newInfo) {
+    _user = newInfo;
+  }
+
+  bool deleteUser() {
+    _user = {};
+    return true;
   }
 }

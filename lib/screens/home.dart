@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'login.dart';
-import 'user_edit_screen.dart';
+import 'user_edit.dart';
 import 'user_history.dart';
 
 class MyHomePage extends StatelessWidget {

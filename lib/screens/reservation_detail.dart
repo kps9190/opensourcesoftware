@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'wait_cancel_confirm.dart';
+import 'wait_cancel.dart';
 
 class ReservationDetailScreen extends StatelessWidget {
   final bool isCanceled; 
@@ -31,11 +31,11 @@ class ReservationDetailScreen extends StatelessWidget {
 
             Text(isCanceled ? '취소된 예약' : '이용예정'),
             const SizedBox(height: 4),
-            Row(
+            const Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text('금오베이글 금오점 >'),
-                const Text('접수 일시: 2025.11.12 (수) 20:37'),
+                Text('금오베이글 금오점 >'),
+                Text('접수 일시: 2025.11.12 (수) 20:37'),
               ],
             ),
             const SizedBox(height: 10),

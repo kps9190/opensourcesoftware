@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import './business_server_stub/business_edit_stub.dart';
 import 'widgets/edit_item_card.dart';
-import 'widgets/image_button_card.dart';
+import 'widgets/card_container.dart';
 
 class BusinessEdit extends StatefulWidget {
   const BusinessEdit({super.key});
@@ -10,16 +11,93 @@ class BusinessEdit extends StatefulWidget {
 }
 
 class _BusinessEditState extends State<BusinessEdit> {
-  String businessName = '금오 베이글';
-  String businessDescription = '세상에서 가장 맛있는 초특급 럭셔리 베이글 맛집';
-  String businessHours = '오늘 08:00 ~ 18:00';
-  String address = '경북 구미시 대학로 61';
+  String businessName = '';
+  String businessDescription = '';
+  String businessHours = '';
+  String address = '';
+  String imagePath = '';
 
   bool get isCompleteEnabled =>
       businessName.isNotEmpty &&
       businessDescription.isNotEmpty &&
       businessHours.isNotEmpty &&
       address.isNotEmpty;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadBusinessInfo();
+  }
+
+  Future<void> _loadBusinessInfo() async {
+    final data = await BusinessEditStub().getBusinessInfo();
+    setState(() {
+      businessName = data['name'];
+      businessDescription = data['description'];
+      businessHours = data['hours'];
+      address = data['address'];
+      imagePath = data['imagePath'];
+    });
+  }
+
+  Future<void> _changeImage() async {
+    final updatedPath = await BusinessEditStub().updateImage();
+    setState(() {
+      imagePath = updatedPath;
+    });
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(const SnackBar(content: Text('사진 변경 완료')));
+  }
+
+  Future<String?> _showEditDialog(String title, String currentValue) {
+    final controller = TextEditingController(text: currentValue);
+    return showDialog<String>(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text(title),
+          content: TextField(
+            controller: controller,
+            decoration: const InputDecoration(border: OutlineInputBorder()),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text('취소'),
+            ),
+            TextButton(
+              onPressed: () => Navigator.pop(context, controller.text.trim()),
+              child: const Text('확인'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Future<void> _saveChanges() async {
+    if (!isCompleteEnabled) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text('빈칸을 채워주세요')));
+      return;
+    }
+
+    final success = await BusinessEditStub().updateBusinessInfo({
+      'name': businessName,
+      'description': businessDescription,
+      'hours': businessHours,
+      'address': address,
+      'imagePath': imagePath,
+    });
+
+    if (success) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text('수정 완료!')));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,14 +110,38 @@ class _BusinessEditState extends State<BusinessEdit> {
         elevation: 1,
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            ImageButtonCard(
-              imagePath: 'assets/images/london_bagel_museum.jpg',
-              buttonText: '사진 변경',
-              onPressed: () {},
+            CardContainer(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Container(
+                    height: 200,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage(imagePath),
+                        fit: BoxFit.contain,
+                      ),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  SizedBox(
+                    width: 140,
+                    child: ElevatedButton(
+                      onPressed: _changeImage,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.blueAccent,
+                      ),
+                      child: const Text('사진 변경'),
+                    ),
+                  ),
+                ],
+              ),
             ),
             const SizedBox(height: 20),
             EditItemCard(
@@ -82,17 +184,7 @@ class _BusinessEditState extends State<BusinessEdit> {
             ),
             const SizedBox(height: 30),
             ElevatedButton(
-              onPressed: () {
-                if (isCompleteEnabled) {
-                  ScaffoldMessenger.of(
-                    context,
-                  ).showSnackBar(const SnackBar(content: Text('수정 완료!')));
-                } else {
-                  ScaffoldMessenger.of(
-                    context,
-                  ).showSnackBar(const SnackBar(content: Text('빈칸을 채워주세요')));
-                }
-              },
+              onPressed: _saveChanges,
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.blueAccent,
                 padding: const EdgeInsets.symmetric(vertical: 16),
@@ -105,32 +197,6 @@ class _BusinessEditState extends State<BusinessEdit> {
           ],
         ),
       ),
-    );
-  }
-
-  Future<String?> _showEditDialog(String title, String currentValue) {
-    final controller = TextEditingController(text: currentValue);
-    return showDialog<String>(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          title: Text(title),
-          content: TextField(
-            controller: controller,
-            decoration: const InputDecoration(border: OutlineInputBorder()),
-          ),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(context),
-              child: const Text('취소'),
-            ),
-            TextButton(
-              onPressed: () => Navigator.pop(context, controller.text.trim()),
-              child: const Text('확인'),
-            ),
-          ],
-        );
-      },
     );
   }
 }

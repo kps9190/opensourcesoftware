@@ -3,7 +3,10 @@ import 'package:flutter_fb/business_screens/business_menu.dart';
 import 'business_edit.dart';
 
 class BusinessHome extends StatelessWidget {
-  const BusinessHome({super.key});
+  final String userId;
+  final String name;
+
+  const BusinessHome({super.key, required this.userId, required this.name});
 
   @override
   Widget build(BuildContext context) {
@@ -11,9 +14,9 @@ class BusinessHome extends StatelessWidget {
       backgroundColor: Colors.grey[200],
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: const Text(
-          '홈 화면',
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+        title: Text(
+          '$name님 홈 화면',
+          style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
       ),
@@ -26,7 +29,7 @@ class BusinessHome extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(12),
-                  boxShadow: [
+                  boxShadow: const [
                     BoxShadow(
                       color: Colors.black26,
                       blurRadius: 6,
@@ -48,9 +51,7 @@ class BusinessHome extends StatelessWidget {
                       padding: EdgeInsets.symmetric(horizontal: 20),
                       child: Divider(height: 1),
                     ),
-                    _simpleListTile('대기/예약 관리', () {
-                      // TODO: 화면 이동
-                    }),
+                    _simpleListTile('대기/예약 관리', () {}),
                     const Padding(
                       padding: EdgeInsets.symmetric(horizontal: 20),
                       child: Divider(height: 1),
@@ -67,9 +68,7 @@ class BusinessHome extends StatelessWidget {
                       padding: EdgeInsets.symmetric(horizontal: 20),
                       child: Divider(height: 1),
                     ),
-                    _simpleListTile('고객 리뷰 관리', () {
-                      // TODO: 화면 이동
-                    }),
+                    _simpleListTile('고객 리뷰 관리', () {}),
                   ],
                 ),
               ),
@@ -81,7 +80,7 @@ class BusinessHome extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(12),
-                  boxShadow: [
+                  boxShadow: const [
                     BoxShadow(
                       color: Colors.black26,
                       blurRadius: 6,
@@ -112,156 +111,25 @@ class BusinessHome extends StatelessWidget {
                     Row(
                       children: [
                         Expanded(
-                          child: GestureDetector(
-                            onTap: () {
-                              // TODO: 화면 이동
-                            },
-                            child: Column(
-                              children: [
-                                Container(
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 8,
-                                    vertical: 4,
-                                  ),
-                                  decoration: BoxDecoration(
-                                    color: Colors.grey[100],
-                                    borderRadius: BorderRadius.circular(4),
-                                  ),
-                                  child: const Text(
-                                    '접수중',
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                      color: Colors.green,
-                                    ),
-                                  ),
-                                ),
-                                const SizedBox(height: 4),
-                                const Text('홀', style: TextStyle(fontSize: 16)),
-                                const Text(
-                                  '??팀',
-                                  style: TextStyle(fontSize: 25),
-                                ),
-                              ],
-                            ),
-                          ),
+                          child: _queueBox('접수중', Colors.green, '홀', '??팀'),
                         ),
                         const SizedBox(width: 12),
                         Expanded(
-                          child: GestureDetector(
-                            onTap: () {
-                              // TODO: 화면 이동
-                            },
-                            child: Column(
-                              children: [
-                                Container(
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 8,
-                                    vertical: 4,
-                                  ),
-                                  decoration: BoxDecoration(
-                                    color: Colors.grey[100],
-                                    borderRadius: BorderRadius.circular(4),
-                                  ),
-                                  child: const Text(
-                                    '접수중',
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                      color: Colors.green,
-                                    ),
-                                  ),
-                                ),
-                                const SizedBox(height: 4),
-                                const Text(
-                                  '테라스',
-                                  style: TextStyle(fontSize: 16),
-                                ),
-                                const Text(
-                                  '??팀',
-                                  style: TextStyle(fontSize: 25),
-                                ),
-                              ],
-                            ),
-                          ),
+                          child: _queueBox('접수중', Colors.green, '테라스', '??팀'),
                         ),
                       ],
                     ),
+
                     const SizedBox(height: 12),
+
                     Row(
                       children: [
                         Expanded(
-                          child: GestureDetector(
-                            onTap: () {
-                              // TODO: 화면 이동
-                            },
-                            child: Column(
-                              children: [
-                                Container(
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 8,
-                                    vertical: 4,
-                                  ),
-                                  decoration: BoxDecoration(
-                                    color: Colors.grey[100],
-                                    borderRadius: BorderRadius.circular(4),
-                                  ),
-                                  child: const Text(
-                                    '마감됨',
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                      color: Colors.red,
-                                    ),
-                                  ),
-                                ),
-                                const SizedBox(height: 4),
-                                const Text(
-                                  '포장',
-                                  style: TextStyle(fontSize: 16),
-                                ),
-                                const Text(
-                                  '0팀',
-                                  style: TextStyle(fontSize: 25),
-                                ),
-                              ],
-                            ),
-                          ),
+                          child: _queueBox('마감됨', Colors.red, '포장', '0팀'),
                         ),
                         const SizedBox(width: 12),
                         Expanded(
-                          child: GestureDetector(
-                            onTap: () {
-                              // TODO: 화면 이동
-                            },
-                            child: Column(
-                              children: [
-                                Container(
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 8,
-                                    vertical: 4,
-                                  ),
-                                  decoration: BoxDecoration(
-                                    color: Colors.grey[100],
-                                    borderRadius: BorderRadius.circular(4),
-                                  ),
-                                  child: const Text(
-                                    '접수중',
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                      color: Colors.green,
-                                    ),
-                                  ),
-                                ),
-                                const SizedBox(height: 4),
-                                const Text(
-                                  '테라스',
-                                  style: TextStyle(fontSize: 16),
-                                ),
-                                const Text(
-                                  '??팀',
-                                  style: TextStyle(fontSize: 25),
-                                ),
-                              ],
-                            ),
-                          ),
+                          child: _queueBox('접수중', Colors.green, '테라스', '??팀'),
                         ),
                       ],
                     ),
@@ -280,6 +148,35 @@ class BusinessHome extends StatelessWidget {
       contentPadding: const EdgeInsets.symmetric(horizontal: 20),
       title: Text(title),
       onTap: onTap,
+    );
+  }
+
+  static Widget _queueBox(
+    String status,
+    Color statusColor,
+    String label,
+    String count,
+  ) {
+    return GestureDetector(
+      onTap: () {},
+      child: Column(
+        children: [
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+            decoration: BoxDecoration(
+              color: Colors.grey[100],
+              borderRadius: BorderRadius.circular(4),
+            ),
+            child: Text(
+              status,
+              style: TextStyle(fontSize: 12, color: statusColor),
+            ),
+          ),
+          const SizedBox(height: 4),
+          Text(label, style: const TextStyle(fontSize: 16)),
+          Text(count, style: const TextStyle(fontSize: 25)),
+        ],
+      ),
     );
   }
 }

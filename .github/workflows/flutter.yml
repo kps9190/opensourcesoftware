@@ -9,9 +9,9 @@ name: 플러터 테스트 및 빌드
 
 on:
   push:
-    branches: [admin]
+    branches: [main]
   pull_request:
-    branches: [admin]
+    branches: [main]
 
 jobs:
   build:
